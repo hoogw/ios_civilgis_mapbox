@@ -27,7 +27,6 @@
 		3054655E1C183C1800562292 /* ZLTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 305465511C183C1800562292 /* ZLTestViewController.m */; };
 		3054655F1C183C1800562292 /* ZLTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 305465521C183C1800562292 /* ZLTestViewController.xib */; };
 		3081145D1C1B4576005B028C /* UIView+ZLFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 3081145C1C1B4576005B028C /* UIView+ZLFrame.m */; };
-		9C050DB41D2D5FE300D7240A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C050DB31D2D5FE300D7240A /* MapKit.framework */; };
 		9C171A971D2EAF400069A724 /* Mapbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C171A961D2EAF400069A724 /* Mapbox.framework */; };
 		9C171A981D2EAF400069A724 /* Mapbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9C171A961D2EAF400069A724 /* Mapbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -82,7 +81,6 @@
 		305465521C183C1800562292 /* ZLTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZLTestViewController.xib; sourceTree = "<group>"; };
 		3081145B1C1B4576005B028C /* UIView+ZLFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ZLFrame.h"; sourceTree = "<group>"; };
 		3081145C1C1B4576005B028C /* UIView+ZLFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ZLFrame.m"; sourceTree = "<group>"; };
-		9C050DB31D2D5FE300D7240A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		9C171A961D2EAF400069A724 /* Mapbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Mapbox.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,7 +89,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C050DB41D2D5FE300D7240A /* MapKit.framework in Frameworks */,
 				9C171A971D2EAF400069A724 /* Mapbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -103,7 +100,6 @@
 			isa = PBXGroup;
 			children = (
 				9C171A961D2EAF400069A724 /* Mapbox.framework */,
-				9C050DB31D2D5FE300D7240A /* MapKit.framework */,
 				3054651E1C183B7F00562292 /* ZLNavigationControllerDemo */,
 				3054651D1C183B7F00562292 /* Products */,
 			);
@@ -249,7 +245,7 @@
 						CreatedOnToolsVersion = 7.1.1;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -442,7 +438,7 @@
 				INFOPLIST_FILE = ZLNavigationControllerDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.trgv.mapbox;
+				PRODUCT_BUNDLE_IDENTIFIER = net.transparentgov.ios.mapbox;
 				PRODUCT_NAME = trgv_mapbox;
 			};
 			name = Debug;
@@ -460,7 +456,7 @@
 				INFOPLIST_FILE = ZLNavigationControllerDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.trgv.mapbox;
+				PRODUCT_BUNDLE_IDENTIFIER = net.transparentgov.ios.mapbox;
 				PRODUCT_NAME = trgv_mapbox;
 			};
 			name = Release;
