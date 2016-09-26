@@ -27,8 +27,9 @@
 		3054655E1C183C1800562292 /* ZLTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 305465511C183C1800562292 /* ZLTestViewController.m */; };
 		3054655F1C183C1800562292 /* ZLTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 305465521C183C1800562292 /* ZLTestViewController.xib */; };
 		3081145D1C1B4576005B028C /* UIView+ZLFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 3081145C1C1B4576005B028C /* UIView+ZLFrame.m */; };
-		9C171A971D2EAF400069A724 /* Mapbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C171A961D2EAF400069A724 /* Mapbox.framework */; };
-		9C171A981D2EAF400069A724 /* Mapbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9C171A961D2EAF400069A724 /* Mapbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9CF4DB361D9994F700928EC3 /* Mapbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CF4DB351D9994F700928EC3 /* Mapbox.framework */; };
+		9CF4DB371D99982100928EC3 /* Mapbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CF4DB351D9994F700928EC3 /* Mapbox.framework */; };
+		9CF4DB381D99982100928EC3 /* Mapbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9CF4DB351D9994F700928EC3 /* Mapbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -38,7 +39,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9C171A981D2EAF400069A724 /* Mapbox.framework in Embed Frameworks */,
+				9CF4DB381D99982100928EC3 /* Mapbox.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -81,7 +82,7 @@
 		305465521C183C1800562292 /* ZLTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZLTestViewController.xib; sourceTree = "<group>"; };
 		3081145B1C1B4576005B028C /* UIView+ZLFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ZLFrame.h"; sourceTree = "<group>"; };
 		3081145C1C1B4576005B028C /* UIView+ZLFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ZLFrame.m"; sourceTree = "<group>"; };
-		9C171A961D2EAF400069A724 /* Mapbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Mapbox.framework; sourceTree = "<group>"; };
+		9CF4DB351D9994F700928EC3 /* Mapbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Mapbox.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,7 +90,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C171A971D2EAF400069A724 /* Mapbox.framework in Frameworks */,
+				9CF4DB361D9994F700928EC3 /* Mapbox.framework in Frameworks */,
+				9CF4DB371D99982100928EC3 /* Mapbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,7 +101,7 @@
 		305465131C183B7F00562292 = {
 			isa = PBXGroup;
 			children = (
-				9C171A961D2EAF400069A724 /* Mapbox.framework */,
+				9CF4DB351D9994F700928EC3 /* Mapbox.framework */,
 				3054651E1C183B7F00562292 /* ZLNavigationControllerDemo */,
 				3054651D1C183B7F00562292 /* Products */,
 			);
@@ -434,6 +436,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/mapbox-ios-sdk-3-3/dynamic",
 				);
 				INFOPLIST_FILE = ZLNavigationControllerDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -452,6 +455,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/mapbox-ios-sdk-3-3/dynamic",
 				);
 				INFOPLIST_FILE = ZLNavigationControllerDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
