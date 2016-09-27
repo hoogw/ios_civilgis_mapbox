@@ -13,5 +13,9 @@
 
 @property (strong, nonatomic) NSString *subject;
 @property (strong, nonatomic) NSString *area;
+@property (nonatomic) MGLMapView *mapView;
+@property (nonatomic) MGLPolygon *selected_polygon;
+@property (nonatomic) MGLPolyline *selected_polyline;
+@property (nonatomic) MGLPointAnnotation *tap_position;
 
 @end

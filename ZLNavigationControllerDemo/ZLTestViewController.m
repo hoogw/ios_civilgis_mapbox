@@ -1,6 +1,7 @@
 
 #import "ZLTestViewController.h"
 #import "ZLCommonConst.h"
+#import "UIView+Toast.h"
 
 @interface ZLTestViewController ()
 
@@ -34,8 +35,8 @@
     NSString *area_subject = [NSString stringWithFormat:@"%@_%@", _area, _subject];
     NSSet *current_layers = [NSSet setWithObjects:area_subject, nil];
     
-    //NSArray *feature_list =  [mapView visibleFeaturesAtPoint:tapPoint];
-    NSArray *feature_list =  [mapView visibleFeaturesAtPoint:tapPoint inStyleLayersWithIdentifiers:current_layers];
+    NSArray *feature_list =  [mapView visibleFeaturesAtPoint:tapPoint];
+   // NSArray *feature_list =  [mapView visibleFeaturesAtPoint:tapPoint inStyleLayersWithIdentifiers:current_layers];
     
     NSUInteger *element = [feature_list count];
    
@@ -45,14 +46,184 @@
     
     
     
+    if (element > 0){
+        
+        
+        id feature_clicked = [feature_list objectAtIndex:0];
+        
+        BOOL _is_polygon = [feature_clicked isKindOfClass:[MGLPolygonFeature class]];
+        BOOL _is_polyline = [feature_clicked isKindOfClass:[MGLPolylineFeature class]];
+        BOOL _is_point = [feature_clicked isKindOfClass:[MGLPointFeature class]];
+        
+        
+        if (_is_polygon){
+            
+            // remove last time highlight polygon
+            if (_selected_polygon){
+                [mapView removeAnnotation:_selected_polygon];
+                
+            }
+            
+            
+            CLLocationCoordinate2D *coordinates=[feature_clicked coordinates];
+            
+           
+            NSUInteger numberOfCoordinates = [feature_clicked pointCount];
+            
+            _selected_polygon = [MGLPolygon polygonWithCoordinates:coordinates count:numberOfCoordinates];
+            [mapView addAnnotation:_selected_polygon];
+
+            NSLog(@"clicked polygon %lu", numberOfCoordinates);
+            
+            
+            
+            
+            
+            
+            
+        }// if polygon
+        
+        
+        else if (_is_polyline){
+            
+            
+            // remove last time highlight polygon
+            if (_selected_polyline){
+                [mapView removeAnnotation:_selected_polyline];
+                
+            }
+            
+            
+            CLLocationCoordinate2D *coordinates=[feature_clicked coordinates];
+            
+            
+            NSUInteger numberOfCoordinates = [feature_clicked pointCount];
+            
+            _selected_polyline = [MGLPolyline polylineWithCoordinates:coordinates count:numberOfCoordinates];
+            [mapView addAnnotation:_selected_polyline];
+            
+            NSLog(@"clicked line %lu", numberOfCoordinates);
+            
+            
+            
+            
+            
+        }// if polyline
+        
+       
+        
+        //..... add marker at tap position ........
+        
+        if (_tap_position){
+            [mapView removeAnnotation:_tap_position];
+        }
+        
+        _tap_position = [[MGLPointAnnotation alloc] init];
+        _tap_position.coordinate = tapCoord;
+        _tap_position.title = @"Hello world!";
+        _tap_position.subtitle = @"Welcome to my marker";
+        
+        // Add marker `hello` to the map
+        [mapView addAnnotation:_tap_position];
+        
+        
+        
+        
+        
+        
+        
+        //..... END .... add marker at tap position ........
+        
+        
+        
+        
+        
+        
+        
+        //------------ get attribute properties, add marker  ------------
+        
+        
+        if ([feature_clicked attributes]){
+            
+            
+           NSString *attr_string = [NSString stringWithFormat:@"%@",[feature_clicked attributes]];
+            
+            
+            [self.mapView makeToast:attr_string
+                           duration:2.0
+                           position:CSToastPositionBottom
+                              title:@""
+                              image:[UIImage imageNamed:@"toast.png"]
+                              style:nil
+                         completion:^(BOOL didTap) {
+                             if (didTap) {
+                                // NSLog(@"completion from tap");
+                             } else {
+                                // NSLog(@"completion without tap");
+                             }
+                         }
+             
+                        ];
+            
+            // toggle "tap to dismiss" functionality
+            [CSToastManager setTapToDismissEnabled:YES];
+            
+            // toggle queueing behavior
+            [CSToastManager setQueueEnabled:YES];
+            
+            
+        }// get properties
+        
+        
+        
+        
+        
+        
+        
+        //------------  End ---- get attribute properties, add marker  ------------
+        
+    }// if feature >0
+    
+    
+    
+    
     
     
 }// handle map tap method
 
+
+
+
+
+
+
+
+- (CGFloat)mapView:(MGLMapView *)mapView alphaForShapeAnnotation:(MGLShape *)annotation
+{
+    // Set the alpha for shape annotations to 0.5 (half opacity)
+    return 0.5f;
+}
+
+- (UIColor *)mapView:(MGLMapView *)mapView strokeColorForShapeAnnotation:(MGLShape *)annotation
+{
+    // Set the stroke color for shape annotations
+    return [UIColor whiteColor];
+}
+
+- (UIColor *)mapView:(MGLMapView *)mapView fillColorForPolygonAnnotation:(MGLPolygon *)annotation
+{
+    // Mapbox cyan fill color
+    return [UIColor colorWithRed:59.0f/255.0f green:178.0f/255.0f blue:208.0f/255.0f alpha:1.0f];
+}
+
+
+
+
+
+
+
+
 //%%%%%%%%%%%%%%%%% End  tap %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
 
 
 
@@ -174,16 +345,16 @@
     NSURL *styleURL =[NSURL URLWithString:styleURL_string];
 
     
-    MGLMapView *mapView = [[MGLMapView alloc] initWithFrame:self.view.bounds
+    self.mapView = [[MGLMapView alloc] initWithFrame:self.view.bounds
                                                    styleURL:styleURL];
     
     
     
     
     // Tint the ℹ️ button.
-    mapView.attributionButton.tintColor = [UIColor whiteColor];
+    self.mapView.attributionButton.tintColor = [UIColor whiteColor];
     
-    mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
     // set the map’s center coordinates and zoom level
     NSArray *_init_loc = area_info[_area];
@@ -202,15 +373,15 @@
     
     
     
-    [mapView setCenterCoordinate:center_coord
+    [self.mapView setCenterCoordinate:center_coord
                        zoomLevel:12
                         animated:NO];
     
     
-    mapView.showsUserLocation = YES;
+    self.mapView.showsUserLocation = YES;
     
     
-    
+  
     
     
     
@@ -225,8 +396,8 @@
     tap2.cancelsTouchesInView = NO;
     tap2.numberOfTapsRequired = 2;
     
-    [mapView addGestureRecognizer:tap2];
-    [mapView addGestureRecognizer:tap];
+    [self.mapView addGestureRecognizer:tap2];
+    [self.mapView addGestureRecognizer:tap];
     // [tap requireGestureRecognizerToFail:tap2]; // Ignore single tap if the user actually double taps
     
     
@@ -240,17 +411,10 @@
     
     
     
+    [self.view addSubview:self.mapView];
     
-    
-    
-    mapView.delegate = self;
-    
-    [self.view addSubview:mapView];
-    
-    
-    
-    
-    
+    // Set the delegate property of our map view to self after instantiating it
+    self.mapView.delegate = self;
     
      //..............End........ mapbox init ................
     
